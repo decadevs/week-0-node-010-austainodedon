@@ -7,8 +7,8 @@
  *
  * @returns {number}
  */
-function getMaxPairs(noOfWashes, cleanPile, dirtyPile) {
-  //Procedure, first, get the no of poosible pairs in the clean,
+function getMaxcleanPairs(noOfWashes, cleanPile, dirtyPile) {
+  //Procedure, first, get the no of poosible cleanPairs in the clean,
   //second, given the number of possible washes establish how many
   //dirty socks should be washed also considering the neededone to pair
   //the clean sock
@@ -28,7 +28,7 @@ function getMaxPairs(noOfWashes, cleanPile, dirtyPile) {
     dirtyContainer[dirtySock] = dirtyContainer[dirtySock] + 1 || 1;
   }
   // Then Loop through the dirty container to see if there's clean sock
-  //that need to be paired
+  //that need to be paired and wash
   // and check if it's available in the dirty container considering the no
   //of washes possible and update the various container and no of whashes remaining
 
@@ -42,7 +42,7 @@ function getMaxPairs(noOfWashes, cleanPile, dirtyPile) {
     }
   }
   // Now Do another loop through the dirty container to check if there are
-  //pairs and still within no of washes
+  //cleanPairs to be washed and still within no of washes
   for (const sock of Object.keys(dirtyContainer)) {
     // Exact pair of dirty socks
     if (dirtyContainer[sock] % 2 === 0) {
@@ -72,10 +72,11 @@ function getMaxPairs(noOfWashes, cleanPile, dirtyPile) {
       }
     }
   }
-  let pairs = Object.values(cleanContainer);
-  // Now get the total number of pair by adding up each pairs
-  totalPair = pairs.reduce((pairs, sock) => {
-    return pairs + Math.floor(sock / 2);
+  //assign pair the value from the cleanContainer object
+  let cleanPairs = Object.values(cleanContainer);
+  // Now get the total number of pair by adding up each cleanPairs
+  totalPair = cleanPairs.reduce((cleanPairs, sock) => {
+    return cleanPairs + Math.floor(sock / 2);
   }, 0);
   return totalPair;
 }
@@ -83,6 +84,6 @@ function getMaxPairs(noOfWashes, cleanPile, dirtyPile) {
 const noOfWashes = 2;
 const cleanPile = [1, 2, 3, 1, 2, 3];
 const dirtyPile = [3, 3, 4, 1, 2, 7, 9];
-console.log(getMaxPairs(noOfWashes, cleanPile, dirtyPile));
+console.log(getMaxcleanPairs(noOfWashes, cleanPile, dirtyPile));
 
-module.exports = getMaxPairs;
+module.exports = getMaxcleanPairs;
